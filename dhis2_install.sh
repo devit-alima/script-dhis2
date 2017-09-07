@@ -14,7 +14,10 @@ fi
 #locale -a
 #sudo locale-gen nb_NO.UTF-8
 
-# sudo apt-get install postgresql-9.4
+# TODO - check if Postgres 9.4 is already installed
+sudo apt-get install postgresql-9.4
 
-
+sudo su - postgres -c "
+psql -U postgres -f 
+"
 
