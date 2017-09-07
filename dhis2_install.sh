@@ -19,6 +19,6 @@ sudo apt-get install -y postgresql-9.5
 
 echo Creating the user dhis and database dhis2
 sudo su - postgres -c "
-psql -U postgres -f postgres_setup.sql
+psql -U postgres -f /home/dhis/script-dhis2/postgres_setup.sql
 "
 
