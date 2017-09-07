@@ -15,9 +15,10 @@ fi
 #sudo locale-gen nb_NO.UTF-8
 
 # TODO - check if Postgres 9.5 is already installed
-sudo apt-get install postgresql-9.5
+sudo apt-get install -y postgresql-9.5
 
+echo Creating the user dhis and database dhis2
 sudo su - postgres -c "
-psql -U postgres -f 
+psql -U postgres -f postgres_setup.sql
 "
 
