@@ -68,3 +68,27 @@ sudo /etc/init.d/postgresql restart
 
 sudo apt-get install -y postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-contrib-9.5
 
+if [ ! -f /home/dhis/config/dhis.conf ]; then
+    echo creating dhis.conf
+    cat >> /home/dhis/config/dhis.conf <<EOF
+# Hibernate SQL dialect
+connection.dialect = org.hibernate.dialect.PostgreSQLDialect
+
+# JDBC driver class
+connection.driver_class = org.postgresql.Driver
+
+# Database connection URL
+connection.url = jdbc:postgresql:dhis2
+
+# Database username
+connection.username = dhis
+
+# Database password
+connection.password = $postgres_password
+
+# Database schema behavior, can be validate, update, create, create-drop
+connection.schema = update
+
+# Encryption password (sensitive)
+encryption.password = $postgres_password
+EOF
