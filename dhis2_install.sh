@@ -58,7 +58,10 @@ if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
 	/etc/postgresql/9.5/main/postgresql.conf
     sed -i "0,/wal_writer_delay/s/wal_writer_delay = 10000ms#/" \
 	/etc/postgresql/9.5/main/postgresql.conf
-
     
 else echo looks like postgresql.conf has already been modified
 fi
+
+sudo /etc/init.d/postgresql restart
+
+
