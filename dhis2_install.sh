@@ -92,3 +92,10 @@ connection.schema = update
 # Encryption password (sensitive)
 encryption.password = $postgres_password
 EOF
+else Looks like dhis.conf has already been created.     
+fi
+
+echo Setting permission on dhis.conf file
+sudo chmod 0600 /home/dhis/config/dhis.conf
+
+
