@@ -42,16 +42,16 @@ if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
     sudo cp /etc/postgresql/9.5/main/postgresql.conf \
        /etc/postgresql/9.5/main/postgresql.conf.BAK
     # Substitute in the appropriate strings in the envfile using sed
-    # syntax sed -i "0,/ORIGINAL/s/ORIGINAL/REPLACEMENT/"
+    # syntax sed -i "s/ORIGINAL/REPLACEMENT/"
     # replaces only the first instance of ORIGINAL with REPLACEMENT
 
-    sudo sed -i "0,/max_connections/s/max_connections = 200/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/shared_buffers/s/shared_buffers = 3200MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/maintenance_work_mem/s/maintenance_work_mem = 512MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/effective_cache_size/s/effective_cache_size = 800MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/checkpoint_completion_target/s/checkpoint_completion_target = 0.8/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/synchronous_commit/s/synchronous_commit = off/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/wal_writer_delay/s/wal_writer_delay = 10000ms/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/max_connections/max_connections = 200/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/shared_buffers/shared_buffers = 3200MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/maintenance_work_mem/maintenance_work_mem = 512MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/effective_cache_size/effective_cache_size = 800MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/checkpoint_completion_target/s/checkpoint_completion_target = 0.8/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/synchronous_commit/synchronous_commit = off/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/wal_writer_delay/wal_writer_delay = 10000ms/" /etc/postgresql/9.5/main/postgresql.conf
     
 else echo looks like postgresql.conf has already been modified
 fi
