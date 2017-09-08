@@ -3,6 +3,11 @@
 # Setup DHIS on a fresh install of Ubuntu 16.04
 # Assumes you are already a user called dhis with sudo privileges
 
+echo updating
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get autoremove
+
 echo What password do you want for your postgres user?
 read postgres_password
 
@@ -42,8 +47,8 @@ if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
     # Create a backup
     sudo cp /etc/postgresql/9.5/main/postgresql.conf \
        /etc/postgresql/9.5/main/postgresql.conf.BAK
-    # Substitute in the appropriate strings in the envfile using sed
-    # syntax sed -i "s/ORIGINAL/REPLACEMENT/"
+    # Substitute in the appropriate strings in the postgres file using sed
+    # syntax sed -i "0,/ORIGINAL/s/ORIGINAL/REPLACEMENT/"
     # replaces only the first instance of ORIGINAL with REPLACEMENT
 
     sudo sed -i "0,/max_connections/s/max_connections/max_connections = 200 #/" /etc/postgresql/9.5/main/postgresql.conf
@@ -61,5 +66,5 @@ fi
 echo restarting postgres
 sudo /etc/init.d/postgresql restart
 
-sudo apt-get install postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-contrib-9.5
+sudo apt-get install -y postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-contrib-9.5
 
