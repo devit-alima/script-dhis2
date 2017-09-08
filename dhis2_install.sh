@@ -45,13 +45,13 @@ if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
     # syntax sed -i "s/ORIGINAL/REPLACEMENT/"
     # replaces only the first instance of ORIGINAL with REPLACEMENT
 
-    sudo sed -i "s/max_connections/max_connections = 200/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/shared_buffers/shared_buffers = 3200MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/maintenance_work_mem/maintenance_work_mem = 512MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/effective_cache_size/effective_cache_size = 800MB/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/checkpoint_completion_target/s/checkpoint_completion_target = 0.8/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/synchronous_commit/synchronous_commit = off/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "s/wal_writer_delay/wal_writer_delay = 10000ms/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/max_connections*/max_connections = 200/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/shared_buffers*/shared_buffers = 3200MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/maintenance_work_mem*/maintenance_work_mem = 512MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/effective_cache_size*/effective_cache_size = 800MB/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/checkpoint_completion_target*/checkpoint_completion_target = 0.8/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/synchronous_commit*/synchronous_commit = off/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "s/wal_writer_delay*/wal_writer_delay = 10000ms/" /etc/postgresql/9.5/main/postgresql.conf
     
 else echo looks like postgresql.conf has already been modified
 fi
