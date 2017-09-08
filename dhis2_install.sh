@@ -18,10 +18,10 @@ else echo configuration folder is already created
 fi
 
 # Set the time zone - this requires user input - to be automated
-#echo setting time zone to server location
-#sudo dpkg-reconfigure tzdata
-#locale -a
-#sudo locale-gen nb_NO.UTF-8
+echo setting time zone to server location
+sudo dpkg-reconfigure tzdata
+locale -a
+sudo locale-gen nb_NO.UTF-8
 
 # TODO - check if Postgres 9.5 is already installed
 sudo apt-get install -y postgresql-9.5
@@ -106,9 +106,10 @@ sudo apt-get -y install oracle-java8-installer
 
 echo installing Tomcat 7
 sudo apt-get -y install tomcat7-user
+sudo apt-get autoremove
 
 echo creating tomcat instance for DHIS
-tomcat7-instance-create tomcat-dhis
+tomcat7-instance-create /home/dhis/tomcat-dhis
 
 echo exporting the various environment variables
 export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
@@ -121,7 +122,7 @@ echo fetching the DHIS2 WAR file
 wget https://www.dhis2.org/download/releases/2.27/dhis.war
 
 echo moving dhis.war into the webapps folder
-sudo mv dhis.war tomcat-dhis/webapps/ROOT.war
+sudo mv dhis.war /home/dhis/tomcat-dhis/webapps/ROOT.war
 
 echo starting service
-tomcat-dhis/bin/startup.sh
+/home/dhis/tomcat-dhis/bin/startup.sh
