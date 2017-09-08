@@ -24,7 +24,7 @@ locale -a
 sudo locale-gen nb_NO.UTF-8
 
 # TODO - check if Postgres 9.5 is already installed
-sudo apt-get install -y postgresql-9.5
+sudo apt-get install -y postgresql-9.4
 
 echo Creating the user dhis
 # TODO use the saved password here instead of asking the user again
@@ -44,22 +44,22 @@ createdb -O dhis dhis2
 "
 
 echo Modifying postgresql.conf
-if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
+if [ ! -f /etc/postgresql/9.4/main/postgresql.conf.BAK ]; then
     # Create a backup
-    sudo cp /etc/postgresql/9.5/main/postgresql.conf \
-       /etc/postgresql/9.5/main/postgresql.conf.BAK
+    sudo cp /etc/postgresql/9.4/main/postgresql.conf \
+       /etc/postgresql/9.4/main/postgresql.conf.BAK
     # Substitute in the appropriate strings in the postgres file using sed
     # syntax sed -i "0,/ORIGINAL/s/ORIGINAL/REPLACEMENT/"
     # replaces only the first instance of ORIGINAL with REPLACEMENT
 
-    sudo sed -i "0,/max_connections/s/max_connections/max_connections = 200 #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/shared_buffers/s/shared_buffers/shared_buffers = 3200MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/#work_mem/s/#work_mem/work_mem = 20MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/#maintenance_work_mem/s/#maintenance_work_mem/maintenance_work_mem = 512MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/#effective_cache_size/s/#effective_cache_size/effective_cache_size = 800MB #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/max_connections/s/max_connections/max_connections = 200 #/" /etc/postgresql/9.4/main/postgresql.conf
+    sudo sed -i "0,/shared_buffers/s/shared_buffers/shared_buffers = 3200MB #/" /etc/postgresql/9.4/main/postgresql.conf
+    sudo sed -i "0,/#work_mem/s/#work_mem/work_mem = 20MB #/" /etc/postgresql/9.4/main/postgresql.conf
+    sudo sed -i "0,/#maintenance_work_mem/s/#maintenance_work_mem/maintenance_work_mem = 512MB #/" /etc/postgresql/9.4/main/postgresql.conf
+    sudo sed -i "0,/#effective_cache_size/s/#effective_cache_size/effective_cache_size = 800MB #/" /etc/postgresql/9.4/main/postgresql.conf
     sudo sed -i "0,/#checkpoint_completion_target/s/#checkpoint_completion_target/checkpoint_completion_target = 0.8 #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/#synchronous_commit/s/#synchronous_commit/synchronous_commit = off #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/#wal_writer_delay/s/#wal_writer_delay/wal_writer_delay = 10000ms #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#synchronous_commit/s/#synchronous_commit/synchronous_commit = off #/" /etc/postgresql/9.4/main/postgresql.conf
+    sudo sed -i "0,/#wal_writer_delay/s/#wal_writer_delay/wal_writer_delay = 10000ms #/" /etc/postgresql/9.4/main/postgresql.conf
 
 else echo looks like postgresql.conf has already been modified
 fi
@@ -67,7 +67,7 @@ fi
 echo restarting postgres
 sudo /etc/init.d/postgresql restart
 
-sudo apt-get install -y postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-contrib-9.5
+sudo apt-get install -y postgresql-9.4 postgresql-9.4-postgis-2.2 postgresql-contrib-9.4
 
 if [ ! -f /home/dhis/config/dhis.conf ]; then
     echo creating dhis.conf
@@ -99,10 +99,10 @@ fi
 echo Setting permission on dhis.conf file
 sudo chmod 0600 /home/dhis/config/dhis.conf
 
-echo setting up Oracle Java repos and installing Java8
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get -y update
-sudo apt-get -y install oracle-java8-installer
+#echo setting up Oracle Java repos and installing Java8
+#sudo add-apt-repository ppa:webupd8team/java
+#sudo apt-get -y update
+#sudo apt-get -y install oracle-java8-installer
 
 echo installing Tomcat 7
 sudo apt-get -y install tomcat7-user
