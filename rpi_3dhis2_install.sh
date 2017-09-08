@@ -23,7 +23,7 @@ sudo dpkg-reconfigure tzdata
 locale -a
 sudo locale-gen nb_NO.UTF-8
 
-# TODO - check if Postgres 9.5 is already installed
+# TODO - check if Postgres 9.4 is already installed
 sudo apt-get install -y postgresql-9.4
 
 echo Creating the user dhis
@@ -57,7 +57,7 @@ if [ ! -f /etc/postgresql/9.4/main/postgresql.conf.BAK ]; then
     sudo sed -i "0,/#work_mem/s/#work_mem/work_mem = 20MB #/" /etc/postgresql/9.4/main/postgresql.conf
     sudo sed -i "0,/#maintenance_work_mem/s/#maintenance_work_mem/maintenance_work_mem = 512MB #/" /etc/postgresql/9.4/main/postgresql.conf
     sudo sed -i "0,/#effective_cache_size/s/#effective_cache_size/effective_cache_size = 800MB #/" /etc/postgresql/9.4/main/postgresql.conf
-    sudo sed -i "0,/#checkpoint_completion_target/s/#checkpoint_completion_target/checkpoint_completion_target = 0.8 #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#checkpoint_completion_target/s/#checkpoint_completion_target/checkpoint_completion_target = 0.8 #/" /etc/postgresql/9.4/main/postgresql.conf
     sudo sed -i "0,/#synchronous_commit/s/#synchronous_commit/synchronous_commit = off #/" /etc/postgresql/9.4/main/postgresql.conf
     sudo sed -i "0,/#wal_writer_delay/s/#wal_writer_delay/wal_writer_delay = 10000ms #/" /etc/postgresql/9.4/main/postgresql.conf
 
@@ -93,7 +93,7 @@ connection.schema = update
 # Encryption password (sensitive)
 encryption.password = $postgres_password
 EOF
-else Looks like dhis.conf has already been created.     
+else echo Looks like dhis.conf has already been created.     
 fi
 
 echo Setting permission on dhis.conf file
