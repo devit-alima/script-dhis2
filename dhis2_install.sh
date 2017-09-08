@@ -4,9 +4,9 @@
 # Assumes you are already a user called dhis with sudo privileges
 
 echo updating
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get autoremove
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y autoremove
 
 echo What password do you want for your postgres user?
 read postgres_password
@@ -53,12 +53,12 @@ if [ ! -f /etc/postgresql/9.5/main/postgresql.conf.BAK ]; then
 
     sudo sed -i "0,/max_connections/s/max_connections/max_connections = 200 #/" /etc/postgresql/9.5/main/postgresql.conf
     sudo sed -i "0,/shared_buffers/s/shared_buffers/shared_buffers = 3200MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/work_mem/s/work_mem/work_mem = 20MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/maintenance_work_mem/s/maintenance_work_mem/maintenance_work_mem = 512MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/effective_cache_size/s/effective_cache_size/effective_cache_size = 800MB #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/checkpoint_completion_target/s/checkpoint_completion_target/checkpoint_completion_target = 0.8 #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/synchronous_commit/s/synchronous_commit/synchronous_commit = off #/" /etc/postgresql/9.5/main/postgresql.conf
-    sudo sed -i "0,/wal_writer_delay/s/wal_writer_delay/wal_writer_delay = 10000ms #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#work_mem/s/#work_mem/work_mem = 20MB #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#maintenance_work_mem/s/#maintenance_work_mem/maintenance_work_mem = 512MB #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#effective_cache_size/s/#effective_cache_size/effective_cache_size = 800MB #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#checkpoint_completion_target/s/#checkpoint_completion_target/checkpoint_completion_target = 0.8 #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#synchronous_commit/s/#synchronous_commit/synchronous_commit = off #/" /etc/postgresql/9.5/main/postgresql.conf
+    sudo sed -i "0,/#wal_writer_delay/s/#wal_writer_delay/wal_writer_delay = 10000ms #/" /etc/postgresql/9.5/main/postgresql.conf
 
 else echo looks like postgresql.conf has already been modified
 fi
