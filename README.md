@@ -3,7 +3,9 @@ script dhis2
 
 ## Automation of the process described here: https://docs.dhis2.org/2.25/en/implementer/html/install_server_setup.html
 
-## First create a user "dhis"
+### Get ready to use the script
+
+As root, or a sudo-privileged user, create a user "dhis"
 
 ```
 sudo su -
@@ -26,4 +28,22 @@ sudo su - dhis
 
 ```
 
- 
+Install Git if not already done
+
+```sudo apt install git```
+
+As dhis user, clone this repo
+
+```git clone https://github.com/devit-alima/script-dhis2.git```
+
+Step into the resulting folder and run the script! You will need to sit by and answer questions.
+
+```
+cd script-dhis2
+./dhis2_install.sh
+```
+
+
+
+
+
