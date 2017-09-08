@@ -101,11 +101,11 @@ sudo chmod 0600 /home/dhis/config/dhis.conf
 
 echo setting up Oracle Java repos and installing Java8
 sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
+sudo apt-get -y update
+sudo apt-get -y install oracle-java8-installer
 
 echo installing Tomcat 7
-sudo apt-get install tomcat7-user
+sudo apt-get -y install tomcat7-user
 
 echo creating tomcat instance for DHIS
 tomcat7-instance-create tomcat-dhis
