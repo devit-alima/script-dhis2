@@ -27,6 +27,7 @@ fi
 sudo apt-get install -y postgresql-9.5
 
 echo Creating the user dhis
+# TODO use the saved password here instead of asking the user again
 # This requires a password response from the user
 sudo su - postgres -c "
 createuser -SDRP dhis
@@ -98,4 +99,29 @@ fi
 echo Setting permission on dhis.conf file
 sudo chmod 0600 /home/dhis/config/dhis.conf
 
+echo setting up Oracle Java repos and installing Java8
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
 
+echo installing Tomcat 7
+sudo apt-get install tomcat7-user
+
+echo creating tomcat instance for DHIS
+tomcat7-instance-create tomcat-dhis
+
+echo exporting the various environment variables
+export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
+export JAVA_OPTS='-Xmx7500m -Xms4000m'
+export DHIS2_HOME='/home/dhis/config'
+
+# TODO make sure we do not need to mess with Tomcat connector port settings
+
+echo fetching the DHIS2 WAR file
+wget https://www.dhis2.org/download/releases/2.27/dhis.war
+
+echo moving dhis.war into the webapps folder
+sudo mv dhis.war tomcat-dhis/webapps/ROOT.war
+
+echo starting service
+tomcat-dhis/bin/startup.sh
