@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setup DHIS on a fresh install of Ubuntu 16.04
-# Assumes you are already a user called dhis with sudo privileges
+# Script assumes it is being run by a user called dhis with sudo privileges
 
 echo updating
 sudo apt-get -y update
@@ -34,9 +34,9 @@ createuser -SDRP dhis
 "
 
 # TODO: change this to read from the config file
-sudo -u postgres psql -c '
+sudo -u postgres psql -c "
 ALTER USER dhis WITH PASSWORD $postgres_password
-'
+"
 
 echo creating the database dhis2
 sudo su - postgres -c "
@@ -104,6 +104,8 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get -y update
 sudo apt-get -y install oracle-java8-installer
 
+#sudo apt-get -y install default-jdk
+
 echo installing Tomcat 7
 sudo apt-get -y install tomcat7-user
 sudo apt-get autoremove
@@ -111,18 +113,23 @@ sudo apt-get autoremove
 echo creating tomcat instance for DHIS
 tomcat7-instance-create /home/dhis/tomcat-dhis
 
-echo exporting the various environment variables
+echo adding environment variable setting to tomcat setenv.sh file
+sudo cat <<EOT >> /home/dhis/tomcat-dhis/bin/setenv.sh
 export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
 export JAVA_OPTS='-Xmx7500m -Xms4000m'
 export DHIS2_HOME='/home/dhis/config'
+EOT
 
 # TODO make sure we do not need to mess with Tomcat connector port settings
 
-echo fetching the DHIS2 WAR file
-wget https://www.dhis2.org/download/releases/2.27/dhis.war
+if [ ! -f dhis.war ]; then
+    echo fetching the DHIS2 WAR file
+    wget https://www.dhis2.org/download/releases/2.27/dhis.war
+else echo DHIS2 WAR file has already been downloaded
+fi
 
-echo moving dhis.war into the webapps folder
-sudo mv dhis.war /home/dhis/tomcat-dhis/webapps/ROOT.war
+echo copying the DHIS war file into the tomcat-dhis webapps folder
+sudo cp dhis.war /home/dhis/tomcat-dhis/webapps/ROOT.war
 
 echo starting service
 /home/dhis/tomcat-dhis/bin/startup.sh
