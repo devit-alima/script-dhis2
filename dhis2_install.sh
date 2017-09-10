@@ -30,12 +30,12 @@ echo Creating the user dhis
 # TODO use the saved password here instead of asking the user again
 # This requires a password response from the user
 sudo su - postgres -c "
-createuser -SDRP dhis
+createuser -sdr dhis
 "
 
 # TODO: change this to read from the config file
 sudo -u postgres psql -c "
-ALTER USER dhis WITH PASSWORD $postgres_password
+ALTER USER dhis WITH PASSWORD '$postgres_password'
 "
 
 echo creating the database dhis2
@@ -100,7 +100,7 @@ echo Setting permission on dhis.conf file
 sudo chmod 0600 /home/dhis/config/dhis.conf
 
 echo setting up Oracle Java repos and installing Java8
-sudo add-apt-repository ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get -y update
 sudo apt-get -y install oracle-java8-installer
 
