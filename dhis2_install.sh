@@ -33,8 +33,11 @@ createuser -sdr dhis
 
 echo Setting the password for the Postgres user dhis
 sudo -u postgres psql -c "
-ALTER USER dhis WITH PASSWORD '$postgres_password'
+ALTER USER dhis WITH PASSWORD 'dhis'
 "
+#sudo -u postgres psql -c "
+#ALTER USER dhis WITH PASSWORD '$postgres_password'
+#"
 
 echo creating the database dhis2
 sudo su - postgres -c "
