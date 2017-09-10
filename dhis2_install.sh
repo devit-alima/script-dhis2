@@ -26,14 +26,12 @@ sudo locale-gen nb_NO.UTF-8
 # TODO - check if Postgres 9.5 is already installed
 sudo apt-get install -y postgresql-9.5
 
-echo Creating the user dhis
-# TODO use the saved password here instead of asking the user again
-# This requires a password response from the user
+echo Creating the Postgresql user dhis
 sudo su - postgres -c "
 createuser -sdr dhis
 "
 
-# TODO: change this to read from the config file
+echo Setting the password for the Postgres user dhis
 sudo -u postgres psql -c "
 ALTER USER dhis WITH PASSWORD '$postgres_password'
 "
