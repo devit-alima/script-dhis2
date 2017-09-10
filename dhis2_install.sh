@@ -97,10 +97,17 @@ fi
 echo Setting permission on dhis.conf file
 sudo chmod 0600 /home/dhis/config/dhis.conf
 
-echo setting up Oracle Java repos and installing Java8
+echo silent install of Oracle Java 8
+sudo apt-get install -y python-software-properties debconf-utils
 sudo add-apt-repository -y ppa:webupd8team/java
-sudo apt-get -y update
-sudo apt-get -y install oracle-java8-installer
+sudo apt-get update
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+sudo apt-get install -y oracle-java8-installer
+
+#echo setting up Oracle Java repos and installing Java8
+#sudo add-apt-repository -y ppa:webupd8team/java
+#sudo apt-get -y update
+#sudo apt-get -y install oracle-java8-installer
 
 #sudo apt-get -y install default-jdk
 
