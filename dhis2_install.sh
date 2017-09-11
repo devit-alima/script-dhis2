@@ -10,9 +10,7 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
-echo *************************************************
-echo
-echo *************************************************
+echo 
 echo
 echo What password do you want for your postgres user?
 read postgres_password
@@ -24,6 +22,7 @@ else echo configuration folder is already created
 fi
 
 # Set the time zone - this requires user input - to be automated
+echo
 echo setting time zone to server location
 sudo dpkg-reconfigure tzdata
 locale -a
@@ -68,11 +67,15 @@ createdb -O dhis dhis2
 #else echo looks like postgresql.conf has already been modified
 #fi
 
+echo
 echo restarting postgres
 sudo /etc/init.d/postgresql restart
 
+echo installing postgres utilities
 sudo apt-get install -y postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-contrib-9.5
 
+echo
+echo creating dhis.conf file
 if [ ! -f /home/dhis/config/dhis.conf ]; then
     echo creating dhis.conf
     cat >> /home/dhis/config/dhis.conf <<EOF
