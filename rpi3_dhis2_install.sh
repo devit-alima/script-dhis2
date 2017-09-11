@@ -104,12 +104,12 @@ sudo chmod 0600 /home/dhis/config/dhis.conf
 
 sudo apt-get -y install default-jdk
 
-echo installing Tomcat 8
-sudo apt-get -y install tomcat8-user
+echo installing Tomcat 7
+sudo apt-get -y install tomcat7-user
 sudo apt-get autoremove
 
 echo creating tomcat instance for DHIS
-tomcat8-instance-create /home/dhis/tomcat-dhis
+tomcat7-instance-create /home/dhis/tomcat-dhis
 
 # Small heap memory settings for Java due to 1GB total system memory
 echo adding environment variable setting to tomcat setenv.sh file
