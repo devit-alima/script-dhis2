@@ -125,7 +125,7 @@ tomcat7-instance-create /home/dhis/tomcat-dhis
 echo adding environment variable setting to tomcat setenv.sh file
 sudo cat <<EOT >> /home/dhis/tomcat-dhis/bin/setenv.sh
 export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
-export JAVA_OPTS='-Xmx7500m -Xms4000m'
+export JAVA_OPTS='-Xmx256m -Xms128m'
 export DHIS2_HOME='/home/dhis/config'
 EOT
 
