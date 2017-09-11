@@ -3,6 +3,8 @@
 # Setup DHIS on a fresh install of Ubuntu 16.04
 # Script assumes it is being run by a user called dhis with sudo privileges
 
+set -e
+
 echo updating
 sudo apt-get -y update
 sudo apt-get -y upgrade
