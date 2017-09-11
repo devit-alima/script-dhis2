@@ -101,19 +101,7 @@ fi
 echo Setting permission on dhis.conf file
 sudo chmod 0600 /home/dhis/config/dhis.conf
 
-echo silent install of Oracle Java 8
-sudo apt-get install -y python-software-properties debconf-utils
-sudo add-apt-repository -y ppa:webupd8team/java
-sudo apt-get update
-echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
-sudo apt-get install -y oracle-java8-installer
-
-#echo setting up Oracle Java repos and installing Java8
-#sudo add-apt-repository -y ppa:webupd8team/java
-#sudo apt-get -y update
-#sudo apt-get -y install oracle-java8-installer
-
-#sudo apt-get -y install default-jdk
+sudo apt-get -y install default-jdk
 
 echo installing Tomcat 7
 sudo apt-get -y install tomcat7-user
@@ -125,7 +113,7 @@ tomcat7-instance-create /home/dhis/tomcat-dhis
 # Small heap memory settings for Java due to 1GB total system memory
 echo adding environment variable setting to tomcat setenv.sh file
 sudo cat <<EOT >> /home/dhis/tomcat-dhis/bin/setenv.sh
-export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-armhf/'
 export JAVA_OPTS='-Xmx256m -Xms128m'
 export DHIS2_HOME='/home/dhis/config'
 EOT
