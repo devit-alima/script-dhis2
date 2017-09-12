@@ -115,12 +115,12 @@ sudo apt-get install -y oracle-java8-installer
 
 #sudo apt-get -y install default-jdk
 
-echo installing Tomcat 7
-sudo apt-get -y install tomcat7-user
+echo installing Tomcat 8
+sudo apt-get -y install tomcat8-user
 sudo apt-get autoremove
 
 echo creating tomcat instance for DHIS
-tomcat7-instance-create /home/dhis/tomcat-dhis
+tomcat8-instance-create /home/dhis/tomcat-dhis
 
 echo adding environment variable setting to tomcat setenv.sh file
 sudo cat <<EOT >> /home/dhis/tomcat-dhis/bin/setenv.sh
