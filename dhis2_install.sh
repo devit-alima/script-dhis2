@@ -142,3 +142,34 @@ sudo cp dhis.war /home/dhis/tomcat-dhis/webapps/ROOT.war
 
 echo starting service
 /home/dhis/tomcat-dhis/bin/startup.sh
+
+# Starting Tomcat at boot time
+
+echo creating tomcat.sh file
+if [ ! -f /home/dhis/config/tomcat.sh ]; then
+echo creating tomcat
+    cat >> /home/dhis/config/tomcat.sh <<EOF
+#!/bin/sh
+#Tomcat init script
+
+HOME=/home/dhis/tomcat-dhis/bin
+
+case $1 in
+start)
+        sh ${HOME}/startup.sh
+        ;;
+stop)
+        sh ${HOME}/shutdown.sh
+        ;;
+restart)
+        sh ${HOME}/shutdown.sh
+        sleep 5
+        sh ${HOME}/startup.sh
+        ;;
+esac
+exit 0
+EOF
+
+sudo mv /home/dhis/config/tomcat.sh /etc/init.d
+sudo chmod +x /etc/init.d/tomcat.sh
+sudo /usr/sbin/update-rc.d -f tomcat defaults 81
