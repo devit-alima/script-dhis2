@@ -29,6 +29,7 @@ locale -a
 sudo locale-gen nb_NO.UTF-8
 
 # TODO - check if Postgres 9.5 is already installed
+echo installing Postgresql 9.5
 sudo apt-get install -y postgresql-9.5
 
 echo Creating the Postgresql user dhis
