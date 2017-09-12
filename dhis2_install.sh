@@ -170,6 +170,7 @@ restart)
 esac
 exit 0
 EOF
+fi
 
 sudo mv /home/dhis/config/tomcat.sh /etc/init.d
 sudo chmod +x /etc/init.d/tomcat.sh
