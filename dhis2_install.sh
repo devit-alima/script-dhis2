@@ -173,4 +173,4 @@ fi
 
 sudo cp /home/dhis/config/tomcat.sh /etc/init.d
 sudo chmod +x /etc/init.d/tomcat.sh
-sudo /usr/sbin/update-rc.d -f tomcat defaults 81
+sudo /usr/sbin/update-rc.d -f tomcat.sh defaults 81
