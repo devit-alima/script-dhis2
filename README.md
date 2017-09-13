@@ -41,6 +41,8 @@ As dhis user, clone this repo
 
 ```git clone https://github.com/devit-alima/script-dhis2.git```
 
+If you already have a copy of the dhis.war file, place it in the folder ```~/script-dhis2```; this will avoid the necessity of downloading it anew for each device you install.
+
 Step into the resulting folder and run the script! You will need to sit by and answer questions.
 
 ```
