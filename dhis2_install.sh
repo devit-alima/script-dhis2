@@ -5,15 +5,16 @@
 
 set -e
 
-echo updating
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y autoremove
-
 echo 
 echo
 echo What password do you want for your postgres user?
 read postgres_password
+
+# TODO read the memory of the machine and calculate the amount to give
+# Tomcat (Java) and Postgres
+#echo
+#echo How many GB of RAM does your target machine have?
+#read machine_memory
 
 if [ ! -d /home/dhis/config ]; then
     echo creating configuration folder
@@ -27,6 +28,11 @@ echo setting time zone to server location
 sudo dpkg-reconfigure tzdata
 locale -a
 sudo locale-gen nb_NO.UTF-8
+
+echo updating and upgrading the distribution
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y autoremove
 
 # TODO - check if Postgres 9.5 is already installed
 echo installing Postgresql 9.5
@@ -126,7 +132,7 @@ tomcat8-instance-create /home/dhis/tomcat-dhis
 echo adding environment variable setting to tomcat setenv.sh file
 sudo cat <<EOT >> /home/dhis/tomcat-dhis/bin/setenv.sh
 export JAVA_HOME='/usr/lib/jvm/java-8-oracle/'
-export JAVA_OPTS='-Xmx256m -Xms128m'
+export JAVA_OPTS='-Xmx512m -Xms256m'
 export DHIS2_HOME='/home/dhis/config'
 EOT
 
