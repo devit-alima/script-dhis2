@@ -28,9 +28,14 @@ sudo su - dhis
 
 ```
 
-Install Git if not already done
 
-```sudo apt install git```
+If Git is not already installed and configured, make it so
+
+```
+sudo apt-get install git
+git config --global user.name YOURNAME
+git config --global user.email YOUREMAIL
+```
 
 As dhis user, clone this repo
 
