@@ -181,3 +181,6 @@ sudo chmod +x /etc/init.d/tomcat.sh
 
 echo updating rc.d to run tomcat.sh on boot
 sudo update-rc.d -f tomcat.sh defaults 81
+
+# TODO on Raspberry the systemd method works better - should implement
+# https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
