@@ -120,6 +120,7 @@ sudo apt-get update
 echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
 sudo apt-get install -y oracle-java8-installer
 
+# OpenJDK uses more memory and crashes on machine with 1GB RAM
 #sudo apt-get -y install default-jdk
 
 echo installing Tomcat 8
@@ -152,9 +153,9 @@ echo starting service
 
 # Starting Tomcat at boot time
 
-echo creating tomcat.sh file
+echo checking if tomcat.sh startup script has been created yet
 if [ ! -f /home/dhis/config/tomcat.sh ]; then
-echo creating tomcat
+echo creating tomcat.sh startup script for startup at boot time
     cat >> /home/dhis/config/tomcat.sh <<'EOF'
 #!/bin/sh
 #Tomcat init script
@@ -177,6 +178,11 @@ EOF
 else something went wrong     
 fi
 
+echo copying tomcat.sh startup script to /etc/init.d
 sudo cp /home/dhis/config/tomcat.sh /etc/init.d
+
+echo making tomcat.sh startup script executable
 sudo chmod +x /etc/init.d/tomcat.sh
+
+echo updating rc.d to run tomcat.sh on boot
 sudo /usr/sbin/update-rc.d -f tomcat.sh defaults 81

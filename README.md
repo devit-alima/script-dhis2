@@ -50,6 +50,36 @@ cd script-dhis2
 ./dhis2_install.sh
 ```
 
+# Installation on Raspberry Pi 3
+## This works but doesn't create a very powerful server! Use at your own risk!
+ Setup DHIS on a fresh install of Raspbian Stretch Lite
+ on a Raspberry Pi 3
+ https://downloads.raspberrypi.org/raspbian_lite_latest
+ Script assumes it is being run by a user called dhis with sudo privileges
+
+# Utilisation:
+- Buy Raspberry Pi 3, install Raspbian, get on wifi or Ethernet
+  - Read the docs on their site https://www.raspberrypi.org/downloads/raspbian/
+- Create a user called dhis with sudo privileges
+  - sudo adduser dhis (when asked, use a sensible password)
+  - sudo usermod -aG sudo dhis
+- Reboot and log in as dhis
+- Install git
+  - sudo apt-get install git
+- Clone this repo
+  - git clone https://devit-alima/script-dhis2
+- Run the script
+  - cd /script-dhis2
+  - ./rpi3_dhis2_install.sh
+- Answer the questions (your user password,
+    the password for database, time zone, etc)
+
+
+- NOTE: On Raspbian Stretch, Postgres 9.5 is deprecated. The installation
+    will complain, and suggest that you install 9.6. Please don't; we haven't
+    had time to verify that this works! Unfortunately this means that the
+    script needs user input in mid-stream to accept the installation of
+    Postgresql 9.5.
 
 
 
